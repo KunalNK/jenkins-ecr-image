@@ -27,6 +27,7 @@ pipeline {
     stage('Deploy docker image to AWS ECS container') {
             steps {
                 withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+                  script{
                   if (env_type=='create'){
                     sh "chmod +x ./create_cluster.sh"
                     sh "./create_cluster.sh"
@@ -34,7 +35,8 @@ pipeline {
                   else {
                     sh "chmod +x ./delete_cluster.sh"
                     sh "./delete_cluster.sh"
-                  } 
+                  }
+                  }
                 }
             }
         }
