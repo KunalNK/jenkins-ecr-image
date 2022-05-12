@@ -22,7 +22,7 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-          dockerImage = docker.build registry/"${reponame}" + ":latest"
+          dockerImage = docker.build registry + "/${reponame}" + ":latest"
           sh 'echo $dockerImage'
         }
       }
