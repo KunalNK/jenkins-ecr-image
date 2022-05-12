@@ -32,7 +32,7 @@ pipeline {
         steps{
             script{
               if (env_type=='create'){
-                docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + credentials: 'aws-ecr') {
+                docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + credentials) {
                     dockerImage.push()
                 }
             }
