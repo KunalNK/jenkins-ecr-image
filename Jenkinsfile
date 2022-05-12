@@ -12,8 +12,8 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
             script{
                if (env_type=='create'){
-              aws ecr create-repository \
-  --repository-name jenkins-cicd
+                  aws ecr create-repository \
+                  --repository-name jenkins-cicd
             }
           }
       } 
