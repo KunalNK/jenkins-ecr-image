@@ -1,9 +1,12 @@
 pipeline {
-
+  environment {
+    registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+    registryCredential = 'aws-ecr'
+    dockerImage = ''
+  }
   agent any
   stages {
     stage('Building image') {
-      if (env_type=='create'){
       steps{
         script {
           dockerImage = docker.build registry + ":latest"
@@ -11,22 +14,17 @@ pipeline {
         }
       }
     }
-  }
-  stage('Create ECR repo in AWS') {
-    if (env_type=='create'){
-        steps {
-            withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
-              script{
-                aws ecr create-repository \
-  --repository-name jenkins-cicd
-              }
-            }
-        }
-      } 
-    }
-
+  // stage('Create ECR repo in AWS') {
+  //       steps {
+  //           withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+  //             script{
+  //               aws ecr create-repository \
+  // --repository-name jenkins-cicd
+  //             }
+  //           }
+  //       } 
+  //   }
     stage('Push Image to AWS ECR') {
-      if (env_type=='create'){
         steps{
             script{
                 docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential) {
@@ -34,7 +32,6 @@ pipeline {
                 }
             }
         }
-      }
     }
     
     stage('Deploy docker image to AWS ECS container') {
