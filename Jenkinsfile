@@ -7,17 +7,17 @@ pipeline {
   agent any
   stages {
 
-    stage('Create ECR repo in AWS') {
-      steps {
-          withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
-          script {             
-                        aws ecr create-repository \
-                        --repository-name jenkins-cicd
-                  }
+    // stage('Create ECR repo in AWS') {
+    //   steps {
+    //       withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+    //       script {             
+    //                     aws ecr create-repository \
+    //                     --repository-name jenkins-cicd
+    //               }
               
-          }
-      } 
-      }
+    //       }
+    //   } 
+    //   }
     
   //   stage('Building image') {       
   //       steps{
@@ -31,21 +31,23 @@ pipeline {
   //     }
   //   }  
   // }
+//   }
+// }
+      stage('Create ECR repo in AWS') {
+        when {
+            env_type=='create'
+          }
+        steps {
+            withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+              script{
+                aws ecr create-repository \
+    --repository-name jenkins-cicd
+              }
+            }
+        } 
+        }
   }
 }
-//   stage('Create ECR repo in AWS') {
-//     when {
-//         env_type=='create'
-//       }
-//     steps {
-//         withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
-//           script{
-//             aws ecr create-repository \
-// --repository-name jenkins-cicd
-//           }
-//         }
-//     } 
-//     }
 
 //     stage('Push Image to AWS ECR') {
 //       when {
