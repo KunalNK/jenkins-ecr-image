@@ -34,9 +34,6 @@ pipeline {
 //   }
 // }
       stage('Create ECR repo in AWS') {
-        when {
-            env_type=='create'
-          }
         steps {
             withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
               script{
