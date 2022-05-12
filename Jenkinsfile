@@ -1,14 +1,14 @@
 pipeline {
   agent any
   stages {
-    stage('Building image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":latest"
-          sh 'echo $dockerImage'
-        }
-      }
-    }
+    // stage('Building image') {
+    //   steps{
+    //     script {
+    //       dockerImage = docker.build registry + ":latest"
+    //       sh 'echo $dockerImage'
+    //     }
+    //   }
+    // }
     stage('Create ECR repo in AWS') {
         steps {
             withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
