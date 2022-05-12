@@ -1,19 +1,21 @@
 pipeline {
-    environment {
-    registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
-    registryCredential = 'aws-ecr'
-    dockerImage = ''
-  }
+  //   environment {
+  //   registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+  //   registryCredential = 'aws-ecr'
+  //   dockerImage = ''
+  // }
   agent any
   stages {
     stage('Building image') {       
         steps{
+          withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
           script {
             if (env_type=='create'){
                 dockerImage = docker.build registry + ":latest"
                 sh 'echo $dockerImage'
           }
         }
+      }
     }  
   }
   }
