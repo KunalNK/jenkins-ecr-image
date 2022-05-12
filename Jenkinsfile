@@ -19,7 +19,7 @@ pipeline {
           }
       } 
       }
-    }
+    
   //   stage('Building image') {       
   //       steps{
   //         withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
