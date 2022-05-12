@@ -10,11 +10,12 @@ pipeline {
     stage('Create ECR repo in AWS') {
       steps {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
-             if (env_type=='create'){
-                  script{             
+          script {
+            if (env_type=='create'){             
                         aws ecr create-repository \
                         --repository-name jenkins-cicd
                   }
+              }
           }
       } 
       }
