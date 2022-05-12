@@ -6,18 +6,31 @@ pipeline {
   // }
   agent any
   stages {
-    stage('Building image') {       
-        steps{
-          withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
-          script {
-            if (env_type=='create'){
-                dockerImage = docker.build registry + ":latest"
-                sh 'echo $dockerImage'
+
+    stage('Create ECR repo in AWS') {
+      steps {
+          withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+            script{
+               if (env_type=='create'){
+              aws ecr create-repository \
+  --repository-name jenkins-cicd
+            }
           }
-        }
+      } 
       }
-    }  
-  }
+    }
+  //   stage('Building image') {       
+  //       steps{
+  //         withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
+  //         script {
+  //           if (env_type=='create'){
+  //               dockerImage = docker.build registry + ":latest"
+  //               sh 'echo $dockerImage'
+  //         }
+  //       }
+  //     }
+  //   }  
+  // }
   }
 }
 //   stage('Create ECR repo in AWS') {
