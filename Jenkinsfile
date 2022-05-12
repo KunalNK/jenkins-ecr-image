@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com/"${reponame}"'
+    registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com'
     // registryCredential = 'aws-ecr'
     // dockerImage = ''
   }
