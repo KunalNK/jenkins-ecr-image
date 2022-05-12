@@ -20,8 +20,7 @@ pipeline {
         steps {
             withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
                 script{
-                aws ecr create-repository \
-    --repository-name jenkins-cicd
+                aws ecr create-repository --repository-name jenkins-cicd
                 }
             }
         } 
