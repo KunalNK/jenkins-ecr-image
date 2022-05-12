@@ -2,15 +2,15 @@ pipeline {
 
   agent any
   stages {
-    stage('Building image') {
-      if (env_type=='create'){        
-            steps{
-              script {
-                dockerImage = docker.build registry + ":latest"
-                sh 'echo $dockerImage'
-              }
-            }
-      }  
+    stage('Building image') {       
+        steps{
+          script {
+            if (env_type=='create'){
+            dockerImage = docker.build registry + ":latest"
+            sh 'echo $dockerImage'
+          }
+        }
+    }  
   }
   }
 }
