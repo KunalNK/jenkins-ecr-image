@@ -12,7 +12,7 @@ pipeline {
                 script{
                   if (env_type=='create'){
                     sh 'aws ecr create-repository \
-    --repository-name jenkins-cicd'
+    --repository-name "${reponame}"'
                 }
               }
           } 
