@@ -17,14 +17,14 @@ pipeline {
     when {
         (env_type=='create')
       }
-      steps {
-          withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
-            script{
-              aws ecr create-repository \
+    steps {
+        withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+          script{
+            aws ecr create-repository \
 --repository-name jenkins-cicd
-            }
           }
-      } 
+        }
+    } 
     }
 
     stage('Push Image to AWS ECR') {
