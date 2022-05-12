@@ -33,14 +33,14 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                   {
+                   
                     dockerImage.push()
                 }
             }
         }
     }
     }
-    }
+    
     
     stage('Deploy docker image to AWS ECS container') {
             steps {
