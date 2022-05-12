@@ -12,6 +12,8 @@ pipeline {
             }
       }  
   }
+  }
+}
 //   stage('Create ECR repo in AWS') {
 //     when {
 //         env_type=='create'
@@ -56,4 +58,4 @@ pipeline {
 //             }
 //         }
 //     }
-}
+// }
