@@ -3,37 +3,40 @@ pipeline {
   agent any
   stages {
     stage('Building image') {
-      if (env_type=='create'){
+      when {
+        (env_type=='create')
+      }
       steps{
         script {
           dockerImage = docker.build registry + ":latest"
           sh 'echo $dockerImage'
         }
-      }
-    }
+      }  
   }
   stage('Create ECR repo in AWS') {
-    if (env_type=='create'){
-        steps {
-            withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
-              script{
-                aws ecr create-repository \
-  --repository-name jenkins-cicd
-              }
+    when {
+        (env_type=='create')
+      }
+      steps {
+          withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+            script{
+              aws ecr create-repository \
+--repository-name jenkins-cicd
             }
-        }
+          }
       } 
     }
 
     stage('Push Image to AWS ECR') {
-      if (env_type=='create'){
-        steps{
-            script{
-                docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential) {
-                    dockerImage.push()
-                }
-            }
-        }
+      when {
+        (env_type=='create')
+      }
+      steps{
+          script{
+              docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential) {
+                  dockerImage.push()
+              }
+          }
       }
     }
     
