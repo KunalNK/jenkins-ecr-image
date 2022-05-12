@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Building image') {
       when {
-        (env_type=='create')
+        env_type=='create'
       }
       steps{
         script {
@@ -15,7 +15,7 @@ pipeline {
   }
   stage('Create ECR repo in AWS') {
     when {
-        (env_type=='create')
+        env_type=='create'
       }
     steps {
         withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
@@ -29,7 +29,7 @@ pipeline {
 
     stage('Push Image to AWS ECR') {
       when {
-        (env_type=='create')
+        env_type=='create'
       }
       steps{
           script{
