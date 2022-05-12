@@ -6,8 +6,8 @@ pipeline {
         steps{
           script {
             if (env_type=='create'){
-            dockerImage = docker.build registry + ":latest"
-            sh 'echo $dockerImage'
+                dockerImage = docker.build registry + ":latest"
+                sh 'echo $dockerImage'
           }
         }
     }  
