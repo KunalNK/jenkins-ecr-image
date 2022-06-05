@@ -39,8 +39,9 @@ pipeline {
         script {
           if (env_type=='create'){
           sh '''
-            myreg= $accid
+            myreg = $accid
             echo $myreg
+
           '''
           dockerImage = docker.build  + ":latest"
           // dockerImage = docker.build  + ":latest"
