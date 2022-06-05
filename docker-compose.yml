@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: accid.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd:latest
+    image: accid/jenkins-cicd:latest
     ports:
       - "5000:5000"
     logging:
