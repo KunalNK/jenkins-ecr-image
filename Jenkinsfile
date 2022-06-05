@@ -1,8 +1,6 @@
 pipeline {
   environment {
-    // registry = '$accid'
     registryCredential = 'aws-ecr'
-    // dockerImage = ''
   }
   agent any
   stages {
@@ -12,7 +10,7 @@ pipeline {
                 script{
                   if (env_type=='create'){
                     sh 'aws ecr create-repository \
-    --repository-name jenkins-cicd'
+    --repository-name $image_name'
                 }
               }
           } 
@@ -38,8 +36,7 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-            // dockerImage = docker.build registry + ":latest"
-            app = docker.build("jenkins-cicd")
+            app = docker.build("$image_name")
           }
       }
     }
@@ -49,8 +46,8 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                docker.withRegistry("https://$accid", "ecr:ap-south-1:" + registryCredential) {
-                app.push("latest")
+                docker.withRegistry("https://$accid", "ecr:ap-south-1:" + credentials) {
+                app.push("$image_tag")
                 }
                
               }
