@@ -49,7 +49,7 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                docker.withRegistry("https://$accid", + registryCredential) {
+                docker.withRegistry("https://$accid", "ecr:ap-south-1:" + registryCredential) {
                 app.push("latest")
                 }
                
