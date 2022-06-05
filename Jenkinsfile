@@ -38,7 +38,7 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-          dockerImage = docker.build $accid + ":latest"
+          dockerImage = docker.build '$accid' + ":latest"
           // dockerImage = docker.build  + ":latest"
           sh echo $dockerImage
         }
