@@ -39,7 +39,7 @@ pipeline {
         script {
           if (env_type=='create'){
          sh '''
-          docker build -t $accid/jenkins-cicd:latest
+          docker build -t $accid/jenkins-cicd:latest .
           // dockerImage = docker.build  + ":latest"
           sh echo $dockerImage
           '''
