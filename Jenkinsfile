@@ -38,7 +38,7 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-            dockerImage = docker.build registry + ":latest"
+            dockerImage = docker.build "$accid/jenkins-cicd:latest" + ":latest"
           }
       }
     }
