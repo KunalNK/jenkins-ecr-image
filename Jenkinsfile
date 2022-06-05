@@ -1,9 +1,9 @@
 pipeline {
-  // environment {
-  //   registry = '$accid'
-  //   registryCredential = 'aws-ecr'
-  //   dockerImage = ''
-  // }
+  environment {
+    // registry = '$accid'
+    registryCredential = 'aws-ecr'
+    // dockerImage = ''
+  }
   agent any
   stages {
     stage('Create ECR repo in AWS') {
@@ -49,7 +49,7 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                docker.withRegistry("https://$accid") {
+                docker.withRegistry("https://$accid", + registryCredential) {
                 app.push("latest")
                 }
                
