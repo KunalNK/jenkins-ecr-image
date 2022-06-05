@@ -51,7 +51,7 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                docker.withRegistry("https://" + $accid/jenkins-cicd, "ecr:ap-south-1:" + registryCredential) {
+                docker.withRegistry("https://$accid/jenkins-cicd", "ecr:ap-south-1:" + registryCredential) {
                 dockerImage.push()
                 }
                
