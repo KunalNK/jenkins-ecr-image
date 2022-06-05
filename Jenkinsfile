@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = '${acc-id}.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+    registry = '${accid}.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
     registryCredential = 'aws-ecr'
     // dockerImage = ''
   }
@@ -25,7 +25,7 @@ pipeline {
                 script{
                   if (env_type=='create'){
                 sh  '''
-                    sed -i "s;acc-id;$acc-id;" docker-compose.yml
+                    sed -i "s;accid;$accid;" docker-compose.yml
                     
                     '''
                 }
