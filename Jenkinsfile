@@ -46,7 +46,7 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                docker.withRegistry("https://$accid", "ecr:ap-south-1:" + credentials) {
+                docker.withRegistry("https://$accid", "ecr:ap-south-1:" + registryCredential) {
                 app.push("$image_tag")
                 }
                
