@@ -26,6 +26,7 @@ pipeline {
                     sed -i "s;accid;$accid;" docker-compose.yml
                     sed -i "s;image_name;$image_name;" docker-compose.yml
                     sed -i "s;image_tag;$image_tag;" docker-compose.yml
+                    sed -i "s;image_name;$image_name;" delete_cluster.sh
 
                     '''
                 }
