@@ -1,6 +1,6 @@
 pipeline {
   environment {
-  // #registry = '$accid.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+  // #registry = $accid.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
     registryCredential = 'aws-ecr'
   //   // dockerImage = ''
   }
@@ -40,8 +40,7 @@ pipeline {
           if (env_type=='create'){
          sh '''
           docker build -t $accid/jenkins-cicd:latest .
-          // dockerImage = docker.build  + ":latest"
-          sh echo $dockerImage
+
           '''
         }
       }
@@ -52,7 +51,7 @@ pipeline {
           withAWS(credentials: 'aws-ecr', region: 'ap-south-1'){
             script{
               if (env_type=='create'){
-                docker.withRegistry("https://" + registry, "ecr:ap-south-1:" + registryCredential) {
+                docker.withRegistry("https://" + $accid/jenkins-cicd:latest, "ecr:ap-south-1:" + registryCredential) {
                 dockerImage.push()
                 }
             }
