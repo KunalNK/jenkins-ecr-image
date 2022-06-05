@@ -38,10 +38,11 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-         
-          dockerImage = docker.build --build-arg '$accid.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd' + ":latest"
+         sh '''
+          docker build --build-arg '$accid.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd' + ":latest"
           // dockerImage = docker.build  + ":latest"
           sh echo $dockerImage
+          '''
         }
       }
     }
