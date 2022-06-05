@@ -75,5 +75,18 @@ pipeline {
                 }
             }
         }
+
+    stage('Delete ECR repo in AWS') {
+          steps {
+              withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+                script{
+                  if (env_type=='delete'){
+                    sh 'aws ecr delete-repository \
+    --repository-name $image_name'
+                }
+              }
+          } 
+      }
+    }
     }
 }
