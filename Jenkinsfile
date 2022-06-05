@@ -39,8 +39,8 @@ pipeline {
         script {
           if (env_type=='create'){
           // dockerImage = docker.build registry + ":latest"
-          dockerImage = docker.build '$accid.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd' + ":latest"
-          sh 'echo $dockerImage'
+          dockerImage = docker.build $accid.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd + ":latest"
+          sh echo $dockerImage
         }
       }
     }
