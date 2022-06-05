@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = '"${acc-id}".dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+    registry = '${acc-id}.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
     registryCredential = 'aws-ecr'
     // dockerImage = ''
   }
