@@ -37,7 +37,7 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-          dockerImage = docker.build ${accid}.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd + ":latest"
+          dockerImage = docker.build "${accid}".dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd + ":latest"
           sh 'echo $dockerImage'
         }
       }
