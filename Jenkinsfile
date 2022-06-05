@@ -1,9 +1,9 @@
 pipeline {
-  environment {
-    registry = '"${accid}".dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
-    registryCredential = 'aws-ecr'
-    // dockerImage = ''
-  }
+  // environment {
+  //   registry = '"${accid}".dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+  //   registryCredential = 'aws-ecr'
+  //   // dockerImage = ''
+  // }
   agent any
   stages {
     stage('Create ECR repo in AWS') {
