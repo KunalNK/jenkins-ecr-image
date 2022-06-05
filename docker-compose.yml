@@ -1,7 +1,7 @@
 version: '3'
 services:
   web:
-    image: accid/jenkins-cicd:latest
+    image: accid/image_name:image_tag
     ports:
       - "5000:5000"
     logging:

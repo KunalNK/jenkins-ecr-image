@@ -24,8 +24,10 @@ pipeline {
                   if (env_type=='create'){
                 sh  '''
                     sed -i "s;accid;$accid;" docker-compose.yml
-                    echo $accid
-                    
+                    sed -i "s;image_name;$image_name;" docker-compose.yml
+                    sed -i "s;image_tag;$image_tag;" docker-compose.yml
+                    sed -i "s;image_name;$image_name;" delete_cluster.sh
+
                     '''
                 }
               }
