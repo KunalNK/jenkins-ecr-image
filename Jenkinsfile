@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = $accid
+    registry = '$accid'
     registryCredential = 'aws-ecr'
     dockerImage = ''
   }
