@@ -1,6 +1,6 @@
 pipeline {
   environment {
-  registry = '$accid/jenkins-cicd'
+  // #registry = '$accid.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
     registryCredential = 'aws-ecr'
   //   // dockerImage = ''
   }
@@ -38,7 +38,7 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-          dockerImage = docker.build registry + ":latest"
+          dockerImage = docker.build $accid + ":latest"
           // dockerImage = docker.build  + ":latest"
           sh echo $dockerImage
         }
