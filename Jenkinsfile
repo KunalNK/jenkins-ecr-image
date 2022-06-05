@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = '"${accid}".dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+    #registry = '"${accid}".dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
     registryCredential = 'aws-ecr'
     // dockerImage = ''
   }
@@ -19,7 +19,7 @@ pipeline {
       }
     }
 
-    stage('replacing account id') {
+    stage('replacing aws account id') {
           steps {
               withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
                 script{
@@ -37,7 +37,7 @@ pipeline {
       steps{
         script {
           if (env_type=='create'){
-          dockerImage = docker.build registry + ":latest"
+          dockerImage = docker.build "${accid}".dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd + ":latest"
           sh 'echo $dockerImage'
         }
       }
