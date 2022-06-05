@@ -56,7 +56,7 @@ pipeline {
                 sh '''
                 docker push $accid/jenkins-cicd:latest
                 '''
-                }
+
             }
         }
     }
