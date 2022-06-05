@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = $accid/jenkins-cicd
+    registry = '$accid/jenkins-cicd'
     registryCredential = 'aws-ecr'
     dockerImage = ''
   }
