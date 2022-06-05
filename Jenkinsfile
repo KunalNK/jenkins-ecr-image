@@ -55,6 +55,7 @@ pipeline {
                 // dockerImage.push()
                 // }
                 sh '''
+                aws ecr get-login --region ap-south-1
                 docker push $accid/jenkins-cicd:latest
                 '''
                
