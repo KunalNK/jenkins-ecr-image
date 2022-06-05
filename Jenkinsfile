@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = '349443600135.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
+    registry = '$acc-id.dkr.ecr.ap-south-1.amazonaws.com/jenkins-cicd'
     registryCredential = 'aws-ecr'
     // dockerImage = ''
   }
@@ -13,6 +13,21 @@ pipeline {
                   if (env_type=='create'){
                     sh 'aws ecr create-repository \
     --repository-name jenkins-cicd'
+                }
+              }
+          } 
+      }
+    }
+
+    stage('replacing account id') {
+          steps {
+              withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
+                script{
+                  if (env_type=='create'){
+                sh  '''
+                    sed -i "s;acc-id;$acc-id;" docker-compose.yml
+                    
+                    '''
                 }
               }
           } 
