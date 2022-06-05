@@ -26,7 +26,6 @@ pipeline {
                     sed -i "s;accid;$accid;" docker-compose.yml
                     sed -i "s;image_name;$image_name;" docker-compose.yml
                     sed -i "s;image_tag;$image_tag;" docker-compose.yml
-                    sed -i "s;image_name;$image_name;" delete_cluster.sh
 
                     '''
                 }
@@ -69,24 +68,12 @@ pipeline {
                   }
                   else {
                     sh "chmod +x ./delete_cluster.sh"
+                    sh "sed -i "s;image_name;$image_name;" delete_cluster.sh"
                     sh "./delete_cluster.sh"
                   }
                   }
                 }
             }
         }
-
-    stage('Delete ECR repo in AWS') {
-          steps {
-              withAWS(credentials: 'aws-ecr', region: 'ap-south-1') {
-                script{
-                  if (env_type=='delete'){
-                    sh 'aws ecr delete-repository \
-    --repository-name $image_name'
-                }
-              }
-          } 
-      }
-    }
     }
 }
