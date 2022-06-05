@@ -26,6 +26,7 @@ pipeline {
                   if (env_type=='create'){
                 sh  '''
                     sed -i "s;accid;$accid;" docker-compose.yml
+                    echo $accid
                     
                     '''
                 }
